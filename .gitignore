@@ -1,0 +1,20 @@
+# Environment variables
+.env
+
+# Generated audio files
+audio/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# VS Code
+.vscode/
+
+# Node
+node_modules/
+
+# OS specific
+.DS_Store
+Thumbs.db

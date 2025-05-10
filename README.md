@@ -18,22 +18,59 @@ A Progressive Web Application for learning Cantonese through interactive flashca
 - Python 3.x
 - A modern web browser (Chrome, Firefox, Edge, etc.)
 - Azure Text-to-Speech API key (for generating new audio files)
+- Git
 
 ### Installation
 
-1. Clone or download this repository
-2. Navigate to the project directory:
+1. Clone the repository:
 ```powershell
-cd path/to/canto-app
+git clone <repository-url>
+cd canto-app
 ```
-3. Start the local server:
+
+2. Create and set up environment variables:
+```powershell
+Copy-Item .env.example .env
+```
+Then edit the `.env` file and add your Azure credentials:
+```
+AZURE_SPEECH_KEY=your_azure_speech_key_here
+AZURE_SPEECH_REGION=your_azure_region_here
+```
+
+3. Install Python dependencies:
+```powershell
+pip install -r requirements.txt
+```
+
+4. Generate audio files (only needed once):
+```powershell
+python generate_cantonese_azure_tts.py
+```
+
+5. Start the local server:
 ```powershell
 python server.py
 ```
-4. Open your web browser and visit:
+
+6. Open your web browser and visit:
 ```
 http://localhost:8000
 ```
+
+### Development Setup
+
+The project is configured with Git to keep sensitive data and generated files local:
+
+- `.env` file contains Azure credentials and is not tracked
+- `audio/` directory with generated MP3 files is excluded from Git
+- `.env.example` provides a template for environment variables
+
+When contributing:
+1. Never commit the `.env` file
+2. Keep audio files local (they can be regenerated)
+3. Update `requirements.txt` if you add new dependencies
+4. Test the app with a fresh clone to ensure setup instructions work
 
 ### Usage
 
@@ -111,6 +148,7 @@ The project uses Azure Cognitive Services Text-to-Speech to generate Cantonese p
 ```powershell
 python generate_cantonese_azure_tts.py
 ```
+4. Azure AI Speech Studio features different voices [Speech Studio](https://speech.microsoft.com/portal/147c01fc25d24cc88641e7c90a99a6ef/voicegallery), selecting a voice and accessing sample code will reveal the voice name that must be used in the generate_cantonese_azure_tts.py script
 
 ### PWA Support
 
