@@ -79,6 +79,79 @@ When contributing:
 - Use arrow keys or navigation buttons to move between cards
 - Install as a PWA through your browser for offline access
 
+## Deployment to Azure Static Web Apps
+
+Follow these steps to deploy the app to Azure Static Web Apps:
+
+### Prerequisites
+
+- Azure CLI installed ([installation guide](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli))
+- Azure account ([sign up here](https://azure.microsoft.com/free/))
+- GitHub repository with your app's code
+
+### Steps
+
+1. **Log in to Azure**
+   ```powershell
+   az login
+   ```
+
+2. **Create a Resource Group**
+   Replace `<resource-group-name>` and `<region>` with your desired resource group name and Azure region (e.g., `uksouth`):
+   ```powershell
+   az group create `
+       --name <resource-group-name> `
+       --location <region>
+   ```
+
+   Example:
+   ```powershell
+   az group create `
+       --name rg-canto-app `
+       --location uksouth
+   ```
+
+3. **Create the Azure Static Web App**
+   Replace `<app-name>` with your desired app name and `<github-repo-url>` with the URL of your GitHub repository:
+   ```powershell
+   az staticwebapp create `
+       --name <app-name> `
+       --resource-group <resource-group-name> `
+       --source <github-repo-url> `
+       --branch main `
+       --location <region> `
+       --app-location "/" `
+       --output-location "/"
+   ```
+
+   Example:
+   ```powershell
+   az staticwebapp create `
+       --name canto-app `
+       --resource-group rg-canto-app `
+       --source https://github.com/your-username/canto-app `
+       --branch main `
+       --location uksouth `
+       --app-location "/" `
+       --output-location "/"
+   ```
+
+5. **Access Your App**
+   Once the deployment is complete, visit the default hostname provided by Azure (e.g., `https://<app-name>.azurestaticapps.net`).
+
+6. **Optional: Add a Custom Domain**
+   If you want to use a custom domain, configure it using:
+   ```powershell
+   az staticwebapp hostname set `
+       --name <app-name> `
+       --resource-group <resource-group-name> `
+       --hostname <your-custom-domain>
+   ```
+
+### Notes
+- Ensure your code is pushed to the `main` branch of your GitHub repository.
+- Azure Static Web Apps automatically rebuilds and deploys your app whenever you push changes to the repository.
+
 ## Project Structure
 
 ```
