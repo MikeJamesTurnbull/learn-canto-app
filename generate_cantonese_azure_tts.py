@@ -26,7 +26,7 @@ if not os.path.exists(audio_dir):
     os.makedirs(audio_dir)
 
 # Read the CSV file and process each word
-with open('words.csv', 'r', encoding='utf-8') as csvfile:
+with open('school_words.csv', 'r', encoding='utf-8') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
         english_word = row['English']
